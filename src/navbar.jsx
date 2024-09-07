@@ -3,13 +3,23 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import logo from "./images/laxfo_logo.png";
+import ShoppingCart from "./shoppingCart";
 
 function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  const handleOpenCart = () => {
+    setCartOpen(true);
+}
+
+  const handleCloseCart = () => {
+      setCartOpen(false)
+  }
 
   return (
     <div className="w-full bg-[rgba(242,235,224,1)] shadow-md fixed top-0 left-0 right-0 z-10 font-pt-serif">
@@ -65,14 +75,15 @@ function Navbar() {
           <a href="/searchbar" className="text-gray-800 text-base md:text-base">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="me-1" />
           </a>
-          <a href="/cartpage" className="text-gray-800 text-base md:text-base">
+          <button className="text-gray-800 text-base md:text-base" onClick={handleOpenCart}>
             <FontAwesomeIcon icon={faCartShopping} className="me-1" />
-          </a>
+          </button>
           <div className="hidden md:flex items-center space-x-6 mr-8">
             <a href="/signIn" className="text-gray-800 hover:text-gray-600 text-base md:text-base">
               Sign In
             </a>
           </div>
+          <ShoppingCart cartOpen={cartOpen} cartClose={handleCloseCart} />
         </div>
       </nav>
     </div>
@@ -80,7 +91,6 @@ function Navbar() {
 }
 
 export default Navbar;
-
 
 
 
